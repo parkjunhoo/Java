@@ -1,0 +1,13 @@
+package jdbc.dao;
+
+/*
+ * 커넥션관리 , 자원반납 , DB관련 메소드에서 처리하는 공통 처리 구현
+ * 
+ * DB연동과 관련된 기능을 유틸리티처럼 제공하는 클래스
+ * 
+ */
+
+
+public class DBUtil {
+	public static 
+}

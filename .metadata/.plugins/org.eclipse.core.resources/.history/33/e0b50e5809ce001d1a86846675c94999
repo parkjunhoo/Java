@@ -1,0 +1,5 @@
+package Jdbc.basic;
+
+public class User {
+
+}

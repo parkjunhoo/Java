@@ -1,0 +1,14 @@
+package algorithm.basic;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+
+public class Problem_2557{
+    public static void main(String[] args){
+    	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    	BufferedWriter bw = new BufferedWriter(new OutputStreamReader(System.out));
+    	
+        System.out.println();
+    }
+}

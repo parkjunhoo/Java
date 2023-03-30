@@ -1,0 +1,24 @@
+package api.util.collection;
+
+import java.util.ArrayList;
+import java.util.Random;
+
+public class ArrayListExam01 {
+
+	public static void main(String[] args) {
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		Random r = new Random();
+		for(int i =0; i<6; i++) {
+			list.add(r.nextInt(50)+1);
+			int num = list.get(i);
+			String str = list.get(i) %2 ==0 ? "짝수" : "홀수";
+			System.out.printf("%d(%s)",num,str);
+		}
+		
+		String[] use = {"aya", "ye", "woo", "ma"};
+		String y = "aya";
+		
+		
+	}
+
+}

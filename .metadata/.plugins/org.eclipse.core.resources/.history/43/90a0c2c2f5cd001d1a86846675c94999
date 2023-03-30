@@ -1,0 +1,25 @@
+package Jdbc.basic;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class SelectTest {
+
+	public static void main(String[] args) {
+		String url ="jdbc:mysql://localhost/jdbc?serverTimezone=UTC";
+		String user = "exam";
+		String password = "exam";
+		String sql = "select * from customer";
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+			Connection con = DriverManager.getConnection(url,user,password);
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+}

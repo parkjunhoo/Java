@@ -1,0 +1,38 @@
+package jdbc.board.exam.copy;
+
+public class BoardDAOImpl implements BoardDAO{
+
+	private String dbUrl;
+	private String dbUser;
+	private String dbPassword;
+	
+	public BoardDAOImpl(){
+		this.dbUrl = "jdbc:mysql://localhost:3306/jdbc?serverTimezone=UTC";
+		this.dbUser = "exam";
+		this.dbPassword = "exam";
+	}
+	public BoardDAOImpl(String dbUrl , String dbUser , String dbPassword){
+		this.dbUrl = dbUrl;
+		this.dbUser = dbUser;
+		this.dbPassword = dbPassword;
+	}
+	
+	@Override
+	public int insert(String id, String title, String content) {
+	
+		
+		return 0;
+	}
+
+	@Override
+	public int update(String id, int boardNum) {
+		return 0;
+	}
+
+	@Override
+	public int delete(int boardNum) {
+		return 0;
+	}
+	
+
+}

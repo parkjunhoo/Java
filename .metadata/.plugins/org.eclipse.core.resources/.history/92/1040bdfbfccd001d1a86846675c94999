@@ -1,0 +1,21 @@
+package Jdbc.basic;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class LoginTest {
+
+	public static void main(String[] args) {
+		String url = "jdbc:mysql://localhost/jdbc?serverTimezone=UTC";
+		String user = "exam";
+		String password = "exam";
+		
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		
+		Connection con = DriverManager.getConnection(url,user,password);
+		Statement stmt = con.createStatement();
+		
+		ResultSet rs = stmt.executeQuery(sql);
+	}
+
+}

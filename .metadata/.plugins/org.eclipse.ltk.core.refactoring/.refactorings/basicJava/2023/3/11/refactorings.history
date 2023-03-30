@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;Account.java&apos; to &apos;advancedJava/src/thread.sync&apos;&#x0D;&#x0A;- Original project: &apos;basicJava&apos;&#x0D;&#x0A;- Destination element: &apos;advancedJava/src/thread.sync&apos;&#x0D;&#x0A;- Original element: &apos;chap11.exception.Account.java&apos;" description="Copy compilation unit" destination="=advancedJava/src&lt;thread.sync" element1="/src&lt;chap11.exception{Account.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1678694801935" units="1" version="1.0"/>
+</session>

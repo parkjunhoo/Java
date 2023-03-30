@@ -1,0 +1,61 @@
+package Jdbc.basic;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Date;
+
+class User {
+	private String id;
+	private String pass;
+	private String name;
+	private String addr;
+	private Date regdate;
+	private int point;
+	private String memo;
+	
+	public User() {
+		
+	}
+	public User(String id , String pass , String name , String addr , Date regdate , String memo) {
+		this.id = id;
+		this.pass = pass;
+		this.name = name;
+		this.addr = addr;
+		this.regdate = regdate;
+		this.point = 1000;
+		this.memo = memo;
+	}
+	
+}
+
+public class UpdateTest_Ver2 {
+
+	public static void main(String[] args) {
+		String url = "jdbc:mysql://localhost:3306/jdbc?serverTimezone=UTC";
+		String user = "exam";
+		String password = "exam";
+		String sql = "update customer set addr = '서울특별시' where addr = '서울'";
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("driver loading success.");
+
+			Connection conn = DriverManager.getConnection(url, user, password);
+			System.out.println("connection success");
+
+			Statement sm = conn.createStatement();
+
+			int result = sm.executeUpdate(sql);
+			System.out.println(result);
+		} catch (ClassNotFoundException e) {
+			System.out.println("driver loading failed.");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+}

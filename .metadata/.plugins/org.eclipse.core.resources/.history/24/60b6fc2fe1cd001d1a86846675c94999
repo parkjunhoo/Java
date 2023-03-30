@@ -1,0 +1,20 @@
+package algorithm.basic;
+
+public class test {
+	public static void main(String[] babbling) {
+		babbling = new String[] {"aya", "yee", "u", "maa", "wyeoo"};
+		
+		int answer = 0;
+        String[] useables = {"aya", "ye", "woo", "ma"};
+        for(String str : babbling){
+            
+            for(String useable : useables){
+                if(str.contains(useable)){
+                    str = str.replaceAll(useable,"");
+                }
+            }
+            if(str.length() == 0) answer++;
+        }
+        return answer;
+	}
+}

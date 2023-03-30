@@ -1,0 +1,27 @@
+package Jdbc.basic;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class UpdateTest {
+
+	public static void main(String[] args) {
+		String url = "jdbc:mysql://localhost:3306/jdbc?serverTimezone=UTC";
+		String user = "exam";
+		String password = "exam";
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("driver loading success.");
+			
+			Connection conn = DriverManager.getConnection(url,user,password);
+			System.out.println("connection success");
+			
+		} catch (ClassNotFoundException e) {
+			System.out.println("driver loading failed.");
+			e.printStackTrace();
+		}
+		
+	}
+
+}

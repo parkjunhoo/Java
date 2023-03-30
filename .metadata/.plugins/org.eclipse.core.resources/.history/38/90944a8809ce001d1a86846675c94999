@@ -1,0 +1,28 @@
+package Jdbc.basic;
+
+import java.util.Date;
+
+public class User {
+	private String id;
+	private String pass;
+	private String name;
+	private String addr;
+	private Date regdate;
+	private int point;
+	private String memo;
+
+	public User() {
+
+	}
+
+	public User(String id, String pass, String name, String addr, Date regdate, String memo) {
+		this.id = id;
+		this.pass = pass;
+		this.name = name;
+		this.addr = addr;
+		this.regdate = regdate;
+		this.point = 1000;
+		this.memo = memo;
+	}
+
+}

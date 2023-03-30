@@ -1,0 +1,21 @@
+package algorithm.basic;
+
+import java.util.ArrayList;
+
+public class Problem_10828 {
+	
+	class Stack <E>{
+		ArrayList<E> list;
+		public Stack() {
+			list = new ArrayList<E>();
+		}
+		public void push(int num) {
+			
+		}
+	}
+	
+	public static void main(String[] args) {
+		Stack<>
+	}
+
+}

@@ -1,0 +1,11 @@
+package jdbc.board.exam.copy;
+
+
+public class Factory {
+	public BoardDAO getDao() {
+		return new BoardDAOImpl();
+	}
+	public BoardDAO getDao(String url , String user , String password) {
+		return new BoardDAOImpl(url,user,password);
+	}
+}

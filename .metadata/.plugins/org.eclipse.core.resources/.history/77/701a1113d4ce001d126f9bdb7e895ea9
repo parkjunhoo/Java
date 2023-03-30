@@ -1,0 +1,108 @@
+package jdbc.board.exam.copy;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class BoardDAOImpl implements BoardDAO{
+
+	private String dbUrl;
+	private String dbUser;
+	private String dbPassword;
+	
+	public BoardDAOImpl(){
+		this.dbUrl = "jdbc:mysql://localhost:3306/jdbc?serverTimezone=UTC";
+		this.dbUser = "exam";
+		this.dbPassword = "exam";
+	}
+	public BoardDAOImpl(String dbUrl , String dbUser , String dbPassword){
+		this.dbUrl = dbUrl;
+		this.dbUser = dbUser;
+		this.dbPassword = dbPassword;
+	}
+	
+	@Override
+	public int insert(String id, String title, String content) {
+		int result = 0;
+		Connection con = null;
+		PreparedStatement st = null;
+		
+		String sql = "insert into tb_board "
+				+ "values(null,?,?,?,sysdate(),0)";
+		
+		try {
+			con = DBUtil.getConnect(dbUrl, dbUser, dbPassword);
+			st = con.prepareStatement(sql);
+			
+			result = st.executeUpdate();
+			st.setString(1, id);
+			st.setString(2, title);
+			st.setString(3, content);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.close(con, st, null);
+		}
+		
+		return result;
+	}
+
+	@Override
+	public int update(String id, int boardNum , String title, String content) {
+		int result = 0;
+		Connection con = null;
+		PreparedStatement st = null;
+		
+		String sql = "update tb_board "
+				+ "set title = ? , content = ? "
+				+ "where id = ? and boardNum = ?";
+		
+		try {
+			con = DBUtil.getConnect(dbUrl, dbUser, dbPassword);
+			st = con.prepareStatement(sql);
+			
+			result = st.executeUpdate();
+			st.setString(1, title);
+			st.setString(2, content);
+			st.setString(3, id);
+			st.setString(4, boardNum);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.close(con, st, null);
+		}
+		
+		return result;
+	}
+
+	@Override
+	public int delete(int boardNum) {
+		int result = 0;
+		Connection con = null;
+		PreparedStatement st = null;
+		
+		String sql = "insert into tb_board "
+				+ "values(null,?,?,?,sysdate(),0)";
+		
+		try {
+			con = DBUtil.getConnect(dbUrl, dbUser, dbPassword);
+			st = con.prepareStatement(sql);
+			
+			result = st.executeUpdate();
+			st.setString(1, id);
+			st.setString(2, title);
+			st.setString(3, content);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.close(con, st, null);
+		}
+		
+		return result;
+	}
+	
+
+}

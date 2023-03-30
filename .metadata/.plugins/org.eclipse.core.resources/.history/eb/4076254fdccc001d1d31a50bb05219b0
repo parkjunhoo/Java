@@ -1,0 +1,31 @@
+package basic;
+
+import java.util.Scanner;
+
+public class testtest {
+
+	public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        String input = s.nextLine();
+        
+        int sum = 0;
+        String buff = "";
+        
+        for(char c : input.toCharArray()){
+            if(c == ' '){
+                sum += Integer.parseInt(buff);
+                System.out.println(buff);
+                buff = "";
+            }else{
+                buff += c;
+            }
+        }
+        System.out.println(buff);
+        sum += sum += Integer.parseInt(buff);
+        //or use split(' ')
+        
+        System.out.print(sum);
+        
+	}
+
+}

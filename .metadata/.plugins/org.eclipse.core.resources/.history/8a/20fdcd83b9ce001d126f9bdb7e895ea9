@@ -1,0 +1,15 @@
+package Jdbc.dao;
+
+public class Atest {
+
+	public static void main(String[] args) {
+		System.out.println("다른 코드들....1");
+		System.out.println("다른 코드들....2");
+		System.out.println("다른 코드들....3");
+		System.out.println("다른 코드들....4");
+		CustomerDAO dao = new CustomerDAOImpl();
+		dao.insert(null, null, null, null, null);
+		
+	}
+
+}

@@ -1,0 +1,19 @@
+package chap07.oop.polymorphism;
+
+public class Circled extends Shape{
+	private double radius;
+	
+	public Circled() {
+		
+	}
+	public Circled(String name , double radius) {
+		super(name);
+		this.radius = radius;
+	}
+	
+	@Override
+	public void calculationArea() {
+		setArea(Math.PI * radius * radius);
+	}
+	
+}

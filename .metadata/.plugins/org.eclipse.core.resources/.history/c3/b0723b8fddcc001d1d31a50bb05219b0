@@ -1,0 +1,36 @@
+package basic;
+
+import java.util.Scanner;
+
+public class testtest {
+
+	public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        String input = s.nextLine();
+        
+        String[] arr = input.split(" ");
+        int sum = 0;
+        for(String str : arr) {
+        	sum += Integer.parseInt(str);
+        }
+        System.out.println(sum);
+        
+        
+//        int sum = 0;
+//        String buff = "";
+//        
+//        for(char c : input.toCharArray()){
+//            if(c != ' '){
+//            	buff += c;
+//            }else{
+//                sum += Integer.parseInt(buff);
+//                buff = "";
+//            }
+//        }
+//        sum += Integer.parseInt(buff);
+//        
+//        System.out.print(sum);
+        
+	}
+
+}

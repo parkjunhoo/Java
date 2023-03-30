@@ -1,0 +1,21 @@
+package jdbc.board.exam.copy;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class DBUtil {
+
+	static {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static Connection getConnect(String dbUrl, String dbUser , String dbPass) {
+		Connection con = null;
+		
+		con = DriverManager.getConnection(dbUrl,dbUser,dbPass);
+	}
+}

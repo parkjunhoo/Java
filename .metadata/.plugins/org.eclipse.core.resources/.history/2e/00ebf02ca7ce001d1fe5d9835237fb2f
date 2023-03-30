@@ -1,0 +1,18 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+public class test{
+    public static void main(String[] args) throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        int num = Integer.parseInt(br.readLine()) / 4;
+        String text = "";
+        
+        while((num--) < 0){
+            text += "long ";
+        }
+        text += "int";
+        
+        System.out.print(text);
+    }
+}

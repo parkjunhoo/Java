@@ -1,0 +1,16 @@
+package basic;
+
+import java.util.Scanner;
+
+public class testtest {
+
+	public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        int num1 = s.nextInt();
+        int num2 = s.nextInt();
+        System.out.println( (num2%10) * num1);
+        System.out.println( ((num2%10)%10) * num1);
+        System.out.println( (num2/100) * num1);
+	}
+
+}

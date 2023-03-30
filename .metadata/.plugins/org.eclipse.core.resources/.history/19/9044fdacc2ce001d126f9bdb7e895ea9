@@ -1,0 +1,10 @@
+package jdbc.dao;
+
+public interface CustomerDAO {
+	void insert(String id, String pass , String name, String addr , String memo);
+	void update(String id , int point ,String pass);
+	void delete(String id);
+	void select(String addr);
+	void login(String id, String pass);
+	
+}

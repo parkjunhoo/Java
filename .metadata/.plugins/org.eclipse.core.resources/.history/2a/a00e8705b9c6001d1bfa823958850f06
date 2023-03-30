@@ -1,0 +1,102 @@
+package Network;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.Socket;
+
+class ClientSendThread extends Thread {
+	Socket socket;
+	PrintWriter out;
+	BufferedReader keyin;
+
+	String sendMsg = "";
+
+	public ClientSendThread() {
+
+	}
+
+	public ClientSendThread(Socket socket) {
+		this.socket = socket;
+		try {
+			out = new PrintWriter(socket.getOutputStream(), true);
+			keyin = new BufferedReader(new InputStreamReader(System.in));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void run() {
+		while (true) {
+			try {
+				if ((sendMsg = keyin.readLine()) != null) {
+					out.println(sendMsg);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+}
+
+class ClientReceiverThread extends Thread {
+	Socket socket;
+	BufferedReader in;
+
+	String recvMsg = "";
+
+	public ClientReceiverThread() {
+
+	}
+
+	public ClientReceiverThread(Socket socket) {
+		this.socket = socket;
+		try {
+			this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void run() {
+		while (true) {
+			try {
+				recvMsg = in.readLine();
+				if (recvMsg != null)
+					System.out.println("클라>>" + recvMsg);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+}
+
+public class SingleChatClient {
+
+	public static void main(String[] args) {
+
+		Socket socket;
+		try {
+			socket = new Socket(InetAddress.getLocalHost(),12344);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			ClientSendThread cst = new ClientSendThread(socket);
+			ClientReceiverThread crt = new ClientReceiverThread(socket);
+			cst.start();
+			crt.start();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+}
