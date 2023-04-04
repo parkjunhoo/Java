@@ -12,7 +12,6 @@
     <fullyQualifiedTypeName name="chap07.oop.inheritance.B"/>
     <fullyQualifiedTypeName name="chap07.oop.polymorphism.Beverage"/>
     <fullyQualifiedTypeName name="java.lang.IllegalArgumentException"/>
-    <fullyQualifiedTypeName name="java.sql.Date"/>
     <fullyQualifiedTypeName name="java.util.TimeZone"/>
     <fullyQualifiedTypeName name="java.util.Locale"/>
     <fullyQualifiedTypeName name="java.util.Locale.Builder"/>
@@ -53,4 +52,8 @@
     <fullyQualifiedTypeName name="java.lang.System"/>
     <fullyQualifiedTypeName name="java.sql.DriverManager"/>
     <fullyQualifiedTypeName name="java.sql.Statement"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="jdbc.dao.CustomerVO"/>
+    <fullyQualifiedTypeName name="java.sql.Date"/>
+    <fullyQualifiedTypeName name="jdbc.board.exam.copy.BoardVO"/>
 </qualifiedTypeNameHistroy>

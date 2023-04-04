@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 //MySQL액세스 하기 위한 기능 - Customer테이블에 대한 CL(login)RUD를 정의
 public class CustomerDAOImpl implements CustomerDAO {
@@ -13,7 +14,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 	private String dbPassword;
 
 	public CustomerDAOImpl() {
-		this.dbUrl = "jdbc:mysql://localhost:3306/jdbc?serverTimezone=UTC";
+		this.dbUrl = "jdbc:mysql://172.30.1.60:3306/jdbc?serverTimezone=UTC";
 		this.dbUser = "exam";
 		this.dbPassword = "exam";
 	}
@@ -22,6 +23,33 @@ public class CustomerDAOImpl implements CustomerDAO {
 		this.dbUrl = dbUrl;
 		this.dbUser = dbUser;
 		this.dbPassword = dbPassword;
+	}
+
+	public int insert(CustomerVO customer) {
+		System.out.println(customer); // 검증
+		Connection con = null;
+		PreparedStatement ptmt = null;
+
+		String sql = "insert into customer values(?,?,?,?,sysdate(),1000,?)";
+		int result = 0;
+
+		try {
+			con = DBUtil.getConnect(dbUrl, dbUser, dbPassword);
+			ptmt = con.prepareStatement(sql);
+
+			ptmt.setString(1, customer.getId());
+			ptmt.setString(2, customer.getPass());
+			ptmt.setString(3, customer.getName());
+			ptmt.setString(4, customer.getAddr());
+			ptmt.setString(5, customer.getMemo());
+			result = ptmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(con, ptmt);
+		}
+
+		return result;
 	}
 
 	@Override
@@ -98,15 +126,20 @@ public class CustomerDAOImpl implements CustomerDAO {
 		return result;
 	}
 
+	// 변환된 레코드를 담을 자료구조
+	// 레코드 하나를 VO로 변환하고
 	@Override
-	public int select(String addr) {
+	public ArrayList<CustomerVO> select(String addr) {
 		Connection con = null;
 		PreparedStatement ptmt = null;
 		ResultSet rs = null;
 
+		CustomerVO customer = null;
+		ArrayList<CustomerVO> customers = new ArrayList<CustomerVO>();
+
 		String sql = "select * from customer where addr = ?";
 		int result = 0;
-		
+
 		try {
 
 			con = DBUtil.getConnect(dbUrl, dbUser, dbPassword);
@@ -116,31 +149,30 @@ public class CustomerDAOImpl implements CustomerDAO {
 			rs = ptmt.executeQuery();
 
 			while (rs.next()) {
-				System.out.print(rs.getString(1) + "\t");
-				System.out.print(rs.getString(2) + "\t");
-				System.out.print(rs.getString(3) + "\t");
-				System.out.print(rs.getString(4) + "\t");
-				System.out.print(rs.getDate(5) + "\t");
-				System.out.print(rs.getInt(6) + "\t");
-				System.out.println(rs.getString(7) + "\t");
+				// 조회한 레코드로 VO 객체를 만들기
+				customer = new CustomerVO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+						rs.getDate(5), rs.getInt(6), rs.getString(7));
+				customers.add(customer);
+				customer = null;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			DBUtil.close(con, ptmt, rs);
 		}
-		return result;
+		return customers;
 	}
 
 	@Override
-	public int login(String id, String pass) {
+	public CustomerVO login(String id, String pass) {
 
 		Connection con = null;
 		PreparedStatement ptmt = null;
 		ResultSet rs = null;
 
+		CustomerVO customer = null;
+
 		String sql = "select * from customer where id = ? and pass = ?";
-		int result = 0;
 
 		try {
 			con = DBUtil.getConnect(dbUrl, dbUser, dbPassword);
@@ -152,7 +184,8 @@ public class CustomerDAOImpl implements CustomerDAO {
 			rs = ptmt.executeQuery();
 
 			if (rs.next()) {
-				System.out.printf("%s님 로그인 되었습니다.", rs.getString("id"));
+				customer = new CustomerVO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+						rs.getDate(5), rs.getInt(6), rs.getString(7));
 			} else {
 				System.out.println("일치하는 회원 정보가 없습니다.");
 			}
@@ -161,8 +194,72 @@ public class CustomerDAOImpl implements CustomerDAO {
 		} finally {
 			DBUtil.close(con, ptmt, rs);
 		}
+		return customer;
 
-		return result;
+	}
 
+	
+	@Override
+	public CustomerVO selectById(String id) {
+
+		Connection con = null;
+		PreparedStatement ptmt = null;
+		ResultSet rs = null;
+
+		CustomerVO customer = null;
+
+		String sql = "select * from customer where id = ?";
+
+		try {
+			con = DBUtil.getConnect(dbUrl, dbUser, dbPassword);
+			ptmt = con.prepareStatement(sql);
+
+			ptmt.setString(1, id);
+
+			rs = ptmt.executeQuery();
+
+			if (rs.next()) {
+				customer = new CustomerVO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+						rs.getDate(5), rs.getInt(6), rs.getString(7));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(con, ptmt, rs);
+		}
+		return customer;
+
+	}
+	
+	
+	@Override
+	public ArrayList<CustomerVO> selectAll() {
+		Connection conn = null;
+		PreparedStatement ptmt = null;
+		ResultSet rs = null;
+
+		CustomerVO customer = null;
+		ArrayList<CustomerVO> customers = new ArrayList<CustomerVO>();
+
+		String sql = "select * from customer";
+
+		try {
+			conn = DBUtil.getConnect(dbUrl, dbUser, dbPassword);
+			ptmt = conn.prepareStatement(sql);
+
+			rs = ptmt.executeQuery();
+			while (rs.next()) {
+				customer = new CustomerVO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+						rs.getDate(5), rs.getInt(6), rs.getString(7));
+				customers.add(customer);
+				customer = null;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.close(conn, ptmt, rs);
+		}
+
+		return customers;
 	}
 }

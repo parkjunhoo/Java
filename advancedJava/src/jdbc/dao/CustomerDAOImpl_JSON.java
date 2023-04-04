@@ -4,165 +4,58 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 //MySQL액세스 하기 위한 기능 - Customer테이블에 대한 CL(login)RUD를 정의
 public class CustomerDAOImpl_JSON implements CustomerDAO {
 
-	private String dbUrl;
-	private String dbUser;
-	private String dbPassword;
-
-	public CustomerDAOImpl_JSON() {
-		this.dbUrl = "jdbc:mysql://localhost:3306/jdbc?serverTimezone=UTC";
-		this.dbUser = "exam";
-		this.dbPassword = "exam";
-	}
-
-	public CustomerDAOImpl_JSON(String dbUrl, String dbUser, String dbPassword) {
-		this.dbUrl = dbUrl;
-		this.dbUser = dbUser;
-		this.dbPassword = dbPassword;
+	@Override
+	public int insert(CustomerVO customer) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
 	public int insert(String id, String pass, String name, String addr, String memo) {
-		Connection con = null;
-		PreparedStatement ptmt = null;
-
-		String sql = "insert into customer values(?,?,?,?,sysdate(),1000,?)";
-		int result = 0;
-
-		try {
-			con = DBUtil.getConnect(dbUrl, dbUser, dbPassword);
-			ptmt = con.prepareStatement(sql);
-
-			ptmt.setString(1, id);
-			ptmt.setString(2, pass);
-			ptmt.setString(3, name);
-			ptmt.setString(4, addr);
-			ptmt.setString(5, memo);
-			result = ptmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DBUtil.close(con, ptmt);
-		}
-
-		return result;
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
 	public int update(String id, int point, String pass) {
-		Connection con = null;
-		PreparedStatement ptmt = null;
-
-		String sql = "update customer set point = ?, pass=? where id = ?";
-		int result = 0;
-		try {
-			con = DBUtil.getConnect(dbUrl, dbUser, dbPassword);
-			ptmt = con.prepareStatement(sql);
-
-			ptmt.setInt(1, point);
-			ptmt.setString(2, pass);
-			ptmt.setString(3, id);
-
-			result = ptmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DBUtil.close(con, ptmt);
-		}
-		return result;
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
 	public int delete(String id) {
-		Connection con = null;
-		PreparedStatement ptmt = null;
-
-		String sql = "delete from customer where id = ?";
-		int result = 0;
-
-		try {
-			con = DBUtil.getConnect(dbUrl, dbUser, dbPassword);
-			ptmt = con.prepareStatement(sql);
-
-			ptmt.setString(1, id);
-
-			result = ptmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DBUtil.close(con, ptmt);
-		}
-		return result;
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
-	public int select(String addr) {
-		Connection con = null;
-		PreparedStatement ptmt = null;
-		ResultSet rs = null;
-
-		String sql = "select * from customer where addr = ?";
-		int result = 0;
-
-		try {
-
-			con = DBUtil.getConnect(dbUrl, dbUser, dbPassword);
-			ptmt = con.prepareStatement(sql);
-
-			ptmt.setString(1, addr);
-			rs = ptmt.executeQuery();
-
-			while (rs.next()) {
-				System.out.print(rs.getString(1) + "\t");
-				System.out.print(rs.getString(2) + "\t");
-				System.out.print(rs.getString(3) + "\t");
-				System.out.print(rs.getString(4) + "\t");
-				System.out.print(rs.getDate(5) + "\t");
-				System.out.print(rs.getInt(6) + "\t");
-				System.out.println(rs.getString(7) + "\t");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DBUtil.close(con, ptmt, rs);
-		}
-		return result;
+	public ArrayList<CustomerVO> select(String addr) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public int login(String id, String pass) {
-
-		Connection con = null;
-		PreparedStatement ptmt = null;
-		ResultSet rs = null;
-
-		String sql = "select * from customer where id = ? and pass = ?";
-		int result = 0;
-
-		try {
-			con = DBUtil.getConnect(dbUrl, dbUser, dbPassword);
-			ptmt = con.prepareStatement(sql);
-
-			ptmt.setString(1, id);
-			ptmt.setString(2, pass);
-
-			rs = ptmt.executeQuery();
-
-			if (rs.next()) {
-				System.out.printf("%s님 로그인 되었습니다.", rs.getString("id"));
-			} else {
-				System.out.println("일치하는 회원 정보가 없습니다.");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			DBUtil.close(con, ptmt, rs);
-		}
-
-		return result;
-
+	public CustomerVO login(String id, String pass) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	@Override
+	public ArrayList<CustomerVO> selectAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CustomerVO selectById(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 }

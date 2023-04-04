@@ -1,26 +1,25 @@
 package algorithm.basic;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
+import java.util.Scanner;
 
 public class test{
-	
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args){
     	
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        Scanner s = new Scanner(System.in);
         
-        int count = Integer.parseInt(br.readLine());
+        int count = s.nextInt();
+        int start = count;
+        
         while(count-- > 0){
-            String[] arr = br.readLine().split(" ");
-            int a = Integer.parseInt(arr[0]);
-            int b = Integer.parseInt(arr[1]);
-            bw.write(a+b+"\n");
+            for(int i =0; i<count; i++){
+                System.out.print(" ");
+            }
+            int a = start-count;
+            
+            for(int i = 0; i<a; i++){
+                System.out.print("*");
+            }
+            System.out.println();
         }
-        
-        bw.flush();
-        bw.close();
-    }
+    } 
 }

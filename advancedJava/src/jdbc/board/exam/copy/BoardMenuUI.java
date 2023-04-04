@@ -1,4 +1,5 @@
 package jdbc.board.exam.copy;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BoardMenuUI {
@@ -55,6 +56,17 @@ public class BoardMenuUI {
 		System.out.print("제목:");
 		String title = key.next();
 		//여기에서 BoardDAO의 메소드를 호출하세요
+		ArrayList<BoardVO> boards= new ArrayList<BoardVO>();
+		
+		boards = dao.selectByTitle(title);
+		
+		if(boards!= null) {
+			for(BoardVO board : boards) {
+				System.out.println(board);
+			}
+		}else {
+			System.out.println("게시물이 없습니다");
+		}
 	}
 	
 	public void readMenu(){
@@ -62,11 +74,27 @@ public class BoardMenuUI {
 		System.out.print("글번호:");
 		int boardNum = key.nextInt();
 		//여기에서 BoardDAO의 메소드를 호출하세요
+		BoardVO board = dao.SelectByBoardNum(boardNum);
+		
+		if(board != null) {
+			System.out.println(board);
+		}else {
+			System.out.println("게시물이 없습니다.");
+		}
+		
 		
 	}
 	public void selectMenu(){
 		System.out.println("*******게시글조회********");
 		//여기에서 BoardDAO의 메소드를 호출하세요
+		ArrayList<BoardVO> boards = dao.selectAll();
+		if(boards !=null){
+			for(BoardVO board : boards) {
+				System.out.println(board);
+			}
+		}else {
+			System.out.println("게시글이 없습니다.");
+		}
 		
 	}
 }

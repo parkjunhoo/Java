@@ -1,0 +1,9 @@
+package jdbc.dao;
+//테이블의 레코드 하나를 표현해 놓은 객체
+//DTO(Data Transfer Object), VO(Value Object)객체라 부른다.
+//=> 계층간 데이터를 교환하기 위해서 생성
+//어떤 비지니스로직을 담고 있지 않고 순수하게 값을 표현해 놓은 객체
+
+public class CustomerVO {
+
+}

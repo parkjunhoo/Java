@@ -1,5 +1,6 @@
 package jdbc.dao;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MenuUI {
@@ -19,7 +20,10 @@ public class MenuUI {
 		System.out.print("메모:");
 		String memo = key.next();
 		
-		int result = dao.insert(id, pass, name, addr, memo);
+		//사용자가 입력한 데이터를 CustomerVO로 생성
+		CustomerVO customer = new CustomerVO(id, pass, name, addr,memo);
+		int result = dao.insert(customer);
+		//int result = dao.insert(id, pass, name, addr, memo);
 		if(result >0) {
 			System.out.println("가입 완료... 환영합니다.");
 		}else {
@@ -66,14 +70,54 @@ public class MenuUI {
 		System.out.print("주소:");
 		String addr = key.next();
 		
-		int result = dao.select(addr);
+		ArrayList<CustomerVO> customers = dao.select(addr);
+		int result = customers.size();
+		
 		
 		if(result >0) {
-			System.out.println("검색이 완료되었습니다.");
+			System.out.println(result+"건 검색이 완료되었습니다.");
+			for(int i =0; i<result; i++) {
+				System.out.println(customers.get(i));
+			}
 		}else {
 			System.out.println("데이터가 존재하지 않습니다.");
 		}
 	}
+	
+	public void getMember() {
+		System.out.println("************멤버조회************");
+		
+		
+		ArrayList<CustomerVO> customers = dao.selectAll();
+		int result = customers.size();
+		
+		
+		if(result >0) {
+			System.out.println(result+"건 검색이 완료되었습니다.");
+			for(int i =0; i<result; i++) {
+				System.out.println(customers.get(i));
+			}
+		}else {
+			System.out.println("데이터가 존재하지 않습니다.");
+		}
+	}
+	
+	public void getInfoMenu() {
+		System.out.println("************사원정보조회************");
+		
+		System.out.print("아이디를 입력하세요:");
+		String id = key.nextLine();
+		CustomerVO customer = dao.selectById(id);
+		
+		
+		if(customer != null) {
+				System.out.println(customer);
+		}else {
+			System.out.println("데이터가 존재하지 않습니다.");
+		}
+	}
+	
+	
 	public void login() {
 		System.out.println("************로그인************");
 		System.out.print("아이디:");
@@ -81,6 +125,13 @@ public class MenuUI {
 		System.out.print("패스워드:");
 		String pass = key.next();
 		
-		System.out.println(dao.login(id, pass));
+		//System.out.println(dao.login(id, pass));
+		CustomerVO customer = dao.login(id, pass);
+		if(customer != null) {
+			System.out.println(customer.getName()+"님 환영합니다.");
+		}else {
+			System.out.println("로그인 실패");
+		}
+		
 	}
 }

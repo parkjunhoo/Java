@@ -1,0 +1,140 @@
+package jdbc.dao;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class MenuUI {
+	Scanner key = new Scanner(System.in);
+	CustomerDAO dao = new Factory().getDao();
+
+	public void insertMenu() {
+		System.out.println("************사원등록************");
+		System.out.print("아이디:");
+		String id = key.next();
+		System.out.print("패스워드:");
+		String pass = key.next();
+		System.out.print("성명:");
+		String name = key.next();
+		System.out.print("주소:");
+		String addr = key.next();
+		System.out.print("메모:");
+		String memo = key.next();
+		
+		//사용자가 입력한 데이터를 CustomerVO로 생성
+		CustomerVO customer = new CustomerVO(id, pass, name, addr,memo);
+		int result = dao.insert(customer);
+		//int result = dao.insert(id, pass, name, addr, memo);
+		if(result >0) {
+			System.out.println("가입 완료... 환영합니다.");
+		}else {
+			System.out.println("이미 가입된 사용자 입니다. 다시 확인하세요... \n 사원번호를 확인하세요");
+		}
+	}
+
+	public void updateMenu() {
+		System.out.println("************사원정보수정************");
+		System.out.print("아이디:");
+		String id = key.next();
+		System.out.print("포인트:");
+		int point = key.nextInt();
+		System.out.print("패스워드:");
+		String pass = key.next();
+		
+		int result = dao.update(id, point, pass);
+		
+		if(result >0) {
+			System.out.println("수정이 완료되었습니다.");
+		}else {
+			System.out.println("수정이 실패했습니다.");
+		}
+		
+	}
+
+	public void deleteMenu() {
+		System.out.println("************퇴사하기************");
+		System.out.print("아이디:");
+		String id = key.next();
+		
+		int result = dao.delete(id);
+		
+		if(result >0) {
+			System.out.println("퇴사 처리 되었습니다.");
+		}else {
+			System.out.println("아이디가 존재하지 않습니다.");
+		}
+		
+	}
+
+	public void selectMenu() {
+		System.out.println("************주소검색************");
+		System.out.print("주소:");
+		String addr = key.next();
+		
+		ArrayList<CustomerVO> customers = dao.select(addr);
+		int result = customers.size();
+		
+		
+		if(result >0) {
+			System.out.println(result+"건 검색이 완료되었습니다.");
+			for(int i =0; i<result; i++) {
+				System.out.println(customers.get(i));
+			}
+		}else {
+			System.out.println("데이터가 존재하지 않습니다.");
+		}
+	}
+	
+	public void getMember() {
+		System.out.println("************멤버조회************");
+		
+		
+		ArrayList<CustomerVO> customers = dao.selectAll();
+		int result = customers.size();
+		
+		
+		if(result >0) {
+			System.out.println(result+"건 검색이 완료되었습니다.");
+			for(int i =0; i<result; i++) {
+				System.out.println(customers.get(i));
+			}
+		}else {
+			System.out.println("데이터가 존재하지 않습니다.");
+		}
+	}
+	
+	public void getInfoMenu() {
+		System.out.println("************사원정보조회************");
+		
+		String id = key.nextLine();
+		ArrayList<CustomerVO> customers = dao.selectById(id);
+		int result = customers.size();
+		
+		
+		if(result >0) {
+			System.out.println(result+"건 검색이 완료되었습니다.");
+			for(int i =0; i<result; i++) {
+				System.out.println(customers.get(i));
+			}
+		}else {
+			System.out.println("데이터가 존재하지 않습니다.");
+		}
+	}
+	
+	
+	public void login() {
+		System.out.println("************로그인************");
+		System.out.print("아이디:");
+		String id = key.nextLine();
+		System.out.print("패스워드:");
+		String pass = key.next();
+		
+		//System.out.println(dao.login(id, pass));
+		CustomerVO customer = dao.login(id, pass);
+		if(customer != null) {
+			System.out.println(customer.getName()+"님 환영합니다.");
+		}else {
+			System.out.println("로그인 실패");
+		}
+		
+	}
+}

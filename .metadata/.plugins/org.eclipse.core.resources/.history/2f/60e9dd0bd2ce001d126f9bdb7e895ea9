@@ -1,5 +1,0 @@
-package jdbc.board.exam.copy;
-
-public class BoardDAOImpl {
-
-}

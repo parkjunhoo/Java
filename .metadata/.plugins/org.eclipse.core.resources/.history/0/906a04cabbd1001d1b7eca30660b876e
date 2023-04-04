@@ -1,0 +1,5 @@
+package jdbc.dao;
+//테이블의 레코드 하나를 표현해 놓은 객체
+public class CustomerVO {
+
+}

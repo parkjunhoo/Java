@@ -1,0 +1,12 @@
+package jdbc.board.exam.copy;
+
+import java.util.ArrayList;
+
+public interface BoardDAO {
+	int insert(String id , String title , String content);
+	ArrayList<BoardVO> selectAll();
+	int update(String id, int boardNum , String title, String content);
+	int delete(int boardNum);
+	ArrayList<BoardVO> selectByTitle(String title);
+	ArrayList<BoardVO> SelectByBoardNum();
+}

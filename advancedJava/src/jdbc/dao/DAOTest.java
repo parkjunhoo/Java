@@ -30,6 +30,9 @@ public class DAOTest {
 			case 1:
 				menu.insertMenu();
 				break;
+			case 2:
+				menu.getMember();
+				break;
 			case 3:
 				menu.updateMenu();
 				break;
@@ -41,6 +44,9 @@ public class DAOTest {
 				break;
 			case 6:
 				menu.login();
+				break;
+			case 7:
+				menu.getInfoMenu();
 				break;
 		}
 	}

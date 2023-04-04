@@ -1,0 +1,48 @@
+package jdbc.dao;
+
+import java.util.Scanner;
+
+public class DAOTest {
+
+	public static void main(String[] args) {
+		Scanner key = new Scanner(System.in);
+		
+		System.out.println("=============================");
+		System.out.println("=          인사관리 시스템       =");
+		System.out.println("=============================");
+		
+		System.out.println("1. 사원등록");
+		System.out.println("2. 전체사원조회");
+		System.out.println("3. 사원정보수정");
+		System.out.println("4. 사원퇴사");
+		System.out.println("5. 주소로 사원 검색");
+		System.out.println("6. 로그인");
+		System.out.println("7. 사원정보조회");
+		System.out.println("원하는 작업을 선택하세요.");
+		
+		int choice = key.nextInt();
+		show(choice);
+	}
+
+	private static void show(int choice) {
+		MenuUI menu = new MenuUI();
+		switch(choice) {
+			case 1:
+				menu.insertMenu();
+				break;
+			case 3:
+				menu.updateMenu();
+				break;
+			case 4:
+				menu.deleteMenu();
+				break;
+			case 5:
+				menu.selectMenu();
+				break;
+			case 6:
+				menu.login();
+				break;
+		}
+	}
+
+}
