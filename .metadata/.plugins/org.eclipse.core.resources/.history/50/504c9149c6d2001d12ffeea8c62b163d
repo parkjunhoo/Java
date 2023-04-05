@@ -12,7 +12,7 @@ public class test{
         
         String line = null;
         while((line = br.readLine()) != null){
-            if(line.equals("0 0")) break;
+            if(line == "0 0") break;
             String arr[] = line.split(" ");
             bw.write(Integer.parseInt(arr[0]) + Integer.parseInt(arr[1])+"\n");
         }
